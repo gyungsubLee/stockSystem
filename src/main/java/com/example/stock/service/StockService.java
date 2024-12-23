@@ -2,6 +2,8 @@ package com.example.stock.service;
 
 import com.example.stock.domain.Stock;
 import com.example.stock.repository.StockRepository;
+import org.hibernate.annotations.Synchronize;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +16,7 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
-    public void decrease(Long id, Long quantity) {
+    public synchronized void  decrease(Long id, Long quantity) {
         // Stock 조회
         // 재고를 감소한 뒤
         // 갱신된 값을 저장
